@@ -21,14 +21,19 @@ def main():
 
 
         key_lst = pg.key.get_pressed()
-        if key_lst[pg.K_UP]:
-            kk_rct.move_ip(0,-1) 
-        elif key_lst[pg.K_DOWN]:
-            kk_rct.move_ip(0,1)
-        elif key_lst[pg.K_LEFT]:
+        if key_lst[pg.K_UP]:  # 上矢印キーが押されたら
+            kk_rct.move_ip(0, -1)
+        if key_lst[pg.K_DOWN]:  # 下矢印キーが押されたら
+            kk_rct.move_ip(0, +1)
+        if key_lst[pg.K_LEFT]:  # 左矢印キーが押されたら
+            kk_rct.move_ip(-1, 0)
+        if key_lst[pg.K_RIGHT]:  # 右矢印キーが押されたら
+            kk_rct.move_ip(+1, 0)
+        else:
             kk_rct.move_ip(-1,0)
-        elif key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip(1,0)
+
+        
+
         x = -(tmr%3200) #練習6-2
 
         screen.blit(bg_img, [x, 0])
