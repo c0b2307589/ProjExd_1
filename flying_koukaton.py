@@ -1,4 +1,3 @@
-#一個目
 import os
 import sys
 import pygame as pg
