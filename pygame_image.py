@@ -12,30 +12,32 @@ def main():
     bg_img2 = pg.transform.flip(bg_img, True, False)
     kk_img = pg.image.load("fig/3.png")
     kk_img = pg.transform.flip(kk_img, True, False)
-    kk_rct = kk_img.get_rect()#こうかとんのrectを取得
+    kk_rct = kk_img.get_rect()
     kk_rct.center = 400, 300
     tmr = 0
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-
         key_lst = pg.key.get_pressed()
-        if key_lst[pg.K_UP]:  # 上矢印キーが押されたら
-            kk_rct.move_ip(0, -1)
-        if key_lst[pg.K_DOWN]:  # 下矢印キーが押されたら
-            kk_rct.move_ip(0, +1)
-        if key_lst[pg.K_LEFT]:  # 左矢印キーが押されたら
-            kk_rct.move_ip(-1, 0)
-        if key_lst[pg.K_RIGHT]:  # 右矢印キーが押されたら
-            kk_rct.move_ip(+1, 0)
+        move_x, move_y = 0, 0
+        if key_lst[pg.K_UP]:
+            move_y -= 1
+        if key_lst[pg.K_DOWN]:
+            move_y += 1
+        if key_lst[pg.K_RIGHT]:
+            move_x += 2
+        if key_lst[pg.K_LEFT]:
+            move_x -= 2
         else:
-            kk_rct.move_ip(-1,0)
+            move_x -= 1  # 何も押されていない場合は左に流れる
 
-        
+        kk_rct.move_ip(move_x, move_y)
 
-        x = -(tmr%3200) #練習6-2
 
+        x = -(tmr%3200)
+    
         screen.blit(bg_img, [x, 0])
         screen.blit(bg_img2, [x+1600, 0])
         screen.blit(bg_img, [x+3200, 0])
@@ -44,7 +46,6 @@ def main():
         pg.display.update()
         tmr += 1        
         clock.tick(200)
-
 
 if __name__ == "__main__":
     pg.init()
